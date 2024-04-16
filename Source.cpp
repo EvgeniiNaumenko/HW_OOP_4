@@ -32,22 +32,25 @@ using namespace std;
 int main()
 {
 	ReservoirArr resArr(5);// для примера создадим массив на 5 резервуаров
-	pritnMenu(); //печать меню
+	//pritnMenu(); //печать меню
 	int choice;
 	bool progWork = true;
 	while (progWork)
 	{
+		pritnMenu();
 		cout << "Enter action !! ";
 		cin >> choice;
 		switch (choice)
 		{
 		case 1:
 		{
+			system("cls");
 			resArr.addRes();
 			break;
 		}
 		case 2:
 		{
+			system("cls");
 			resArr.printRes();
 			int delID;
 			cout << " Enter ID to delete! " << endl;
@@ -57,21 +60,25 @@ int main()
 		}
 		case 3:
 		{
+			system("cls");
 			resArr.printRes();
 			break;
 		}
 		case 4:
 		{
+			system("cls");
 			resArr.printArea();
 			break;
 		}
 		case 5:
 		{
+			pritnMenu();
 			resArr.printVolum();
 			break;
 		}
 		case 6:
 		{
+			system("cls");
 			resArr.printRes();
 			int resOne, resTwo;
 			cout << " Enter ID to first reservoir! " << endl;
@@ -83,6 +90,7 @@ int main()
 		}
 		case 7:
 		{
+			system("cls");
 			resArr.printRes();
 			int resOne, resTwo;
 			cout << " Enter ID to first reservoir! " << endl;
@@ -94,12 +102,14 @@ int main()
 		}
 		case 8:
 		{
+			system("cls");
 			resArr.saveToFile();
 			break;
 		}
 		case 9:
 		{
-			resArr.loadFromFile(); // НЕ РАБОТАЕТ (ПОКА ЧТО)
+			system("cls");
+			resArr.loadFromFile(); 
 			break;
 		}
 		case 10:

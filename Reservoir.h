@@ -26,9 +26,9 @@ public:
 	int isBigSquareRes(const Reservoir&);//4. Для порівняння площі водної поверхні водойм одного типу;
 	void setName(char*);
 	void setType(char*);
-	void setLength(int);
-	void setWidth(int);
-	void setDepth(int);
+	void setLength(double);
+	void setWidth(double);
+	void setDepth(double);
 	void setRes();
 	char* getName();
 	char* getType();

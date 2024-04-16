@@ -167,17 +167,17 @@ void Reservoir::setType(char* type)
 	}
 }
 
-void Reservoir::setLength(int l)
+void Reservoir::setLength(double l)
 {
 	this->length = l;
 }
 
-void Reservoir::setWidth(int w)
+void Reservoir::setWidth(double w)
 {
 	this->width = w;
 }
 
-void Reservoir::setDepth(int d)
+void Reservoir::setDepth(double d)
 {
 	this->depth = d;
 }
@@ -215,7 +215,7 @@ char* Reservoir::getName()
 	char* copyName = new char[size];
 	for (int i = 0; i < size; i++)
 	{
-		copyName[i] = this->type[i];
+		copyName[i] = this->name[i];
 	}
 	copyName[size] = '\0';
 	return copyName;

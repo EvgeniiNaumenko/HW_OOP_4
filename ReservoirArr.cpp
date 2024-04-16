@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 #include <fstream>
+#include <cstring>
 
 ReservoirArr::ReservoirArr(int size)
 {
@@ -84,51 +85,73 @@ void ReservoirArr::printRes()
 void ReservoirArr::saveToFile()
 {
 	const char dataReservoir[] = "reservoirData.dat";
-	const char keyRes[] = "ReservoirKey";
 	FILE* file;
-	if (fopen_s(&file, keyRes, "wb") == 0)
-	{
-		fwrite(&this->capacity, sizeof(int), 1, file);
-		
-	}
-	fclose(file); 
+	 
 	if (fopen_s(&file, dataReservoir, "wb") == 0)
 	{
+		fwrite(&capacity, sizeof(int), 1, file);
 		for (int i = 0; i < capacity; i++)
 		{
-			fwrite(&array[i], sizeof(Reservoir), 1, file);
+			int nameLength = strlen(array[i].getName());
+			fwrite(reinterpret_cast<const char*>(&nameLength), sizeof(int),1,file);
+			fwrite(array[i].getName(),sizeof(char), nameLength,file);
+			int typeLength = strlen(array[i].getType());
+			fwrite(reinterpret_cast<const char*>(&typeLength), sizeof(int), 1, file);
+			fwrite(array[i].getType(), sizeof(char), typeLength, file);
+			double length = array[i].getLength();
+			fwrite(&length, sizeof(double), 1, file);
+			double width = array[i].getWidth();
+			fwrite(&width, sizeof(double), 1, file);
+			double depth = array[i].getDepth();
+			fwrite(&depth, sizeof(double), 1, file);
 		}
 	}
 	fclose(file);
 }
-
 
 void ReservoirArr::loadFromFile()
 {
 
 	const char dataReservoir[] = "reservoirData.dat";
-	const char keyRes[] = "ReservoirKey";
+
 	FILE* file;
 
-	if (fopen_s(&file, keyRes, "rb") == 0)
-	{
-		fread(&this->capacity, sizeof(int), 1, file);
-	}
-	fclose(file);
 	if (fopen_s(&file, dataReservoir, "rb") == 0)
 	{
+		fread(&capacity, sizeof(int), 1, file);
 		this->size = capacity + 5;
 		Reservoir* newArray = new Reservoir[size];
+
 		for (int i = 0; i < capacity; i++)
 		{
-			fread(&array[i], sizeof(Reservoir), 1, file);
+			int nameLength;
+			fread(reinterpret_cast<char*>(&nameLength), sizeof(int),1,file);
+			char* name = new char[nameLength + 1];
+			fread(name,sizeof(char), nameLength,file);
+			name[nameLength] = '\0';
+			int typeLength;
+			fread(reinterpret_cast<char*>(&typeLength), sizeof(int), 1, file);
+			char* type = new char[typeLength + 1];
+			fread(type, sizeof(char), typeLength, file);
+			type[typeLength] = '\0';
+			double length;
+			fread(&length, sizeof(double), 1, file);
+			double width;
+			fread(&width, sizeof(double), 1, file);
+			double depth;
+			fread(&depth, sizeof(double), 1, file);
+
+			array[i].setName(name);
+			delete[] name;
+			array[i].setType(type);
+			delete[] type;
+			array[i].setLength(length);
+			array[i].setWidth(width);
+			array[i].setDepth(depth);
 		}
-		this->array = newArray;
 	}
 	fclose(file);
-	
 }
-
 
 void ReservoirArr::printArea()
 {
