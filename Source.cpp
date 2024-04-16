@@ -56,6 +56,7 @@ int main()
 			cout << " Enter ID to delete! " << endl;
 			cin >> delID;
 			resArr.delRes(delID);
+			system("cls");
 			break;
 		}
 		case 3:
